@@ -1,5 +1,5 @@
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../firebaseConfig.js'; // Ajusta el path si es
+import { auth } from '../firebaseConfig.js'; // Ajusta el path si esdiferente
 
 export default function mostrarLogin() {
 const app = document.getElementById("app");

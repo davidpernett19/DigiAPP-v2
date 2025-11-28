@@ -3,10 +3,10 @@ import { collection, addDoc } from 'firebase/firestore';
 export default function mostrarOriginal() {
 // Objeto base
 let app = {
-nombreapp: "DigiApp-v2",
-descripcion: "Es una aplicacion donde vas a poder guardar y poner a todos tus Digimon favoritos con sus datos mas importantes",
+nombreapp: "Nombre de la app",
+descripcion: "Aqui agregamos una descripción de 30 palabras",
 icono: "https://cdn-icons-png.flaticon.com/512/2909/2909765.png",
-integrantes: ["David pernett"],
+integrantes: ["javier", "maria", "matt"],
 actividad: "Capacitor Firebase",
 url:
 "https://drive.google.com/file/d/1Kl97mmRESu2GWPztzK2XdMvNR68vMQ00/view?usp=drive_link"

@@ -1,6 +1,5 @@
 import { signOut } from 'firebase/auth';
-import { auth } from '../firebaseConfig.js'; // Ajusta el path si es
-diferente
+import { auth } from '../firebaseConfig.js'; // Ajusta el path si es diferente
 import mostrarLogin from './login.js';
 export default function mostrarLogout() {
 const app = document.getElementById("app");
