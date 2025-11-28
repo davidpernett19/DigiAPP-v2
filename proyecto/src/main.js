@@ -1,45 +1,70 @@
-import mostrarRegistro from './componentes/registro.js';
-import mostrarLogin from './componentes/login.js';
+// En tu archivo principal (main.js, app.js, etc.)
+import './style.css'
 import mostrarHome from './componentes/home.js';
-import mostrarLogout from './componentes/logout.js';
 
-
-import { auth } from './firebaseConfig.js';
-import { onAuthStateChanged } from 'firebase/auth';
-onAuthStateChanged(auth, (user) => {
-if (user) {
-document.getElementById("menu").innerHTML = `
-<nav>
-<button id="menuHome">Home</button>
-<button id="menuOriginal">Original</button>
-<button id="menuLogout">Logout</button>
-</nav>
-`;
-document.getElementById("menuHome").addEventListener("click",
-mostrarHome);
-document.getElementById("menuOriginal").addEventListener("click",
-mostrarOriginal);
-document.getElementById("menuLogout").addEventListener("click",
-mostrarLogout);
-mostrarHome()
-} else{
-document.getElementById("menu").innerHTML = `
-<nav>
-
-<button id="menuLogin">Login</button>
-<button id="menuRegistro">Registro</button>
-</nav>
-`;
-document.getElementById("menuLogin").addEventListener("click",
-mostrarLogin);
-document.getElementById("menuRegistro").addEventListener("click",
-mostrarRegistro);
-mostrarLogin();
+// Función para verificar autenticación
+function checkAuth() {
+  return localStorage.getItem('userAuthenticated') === 'true';
 }
-})
 
+// Función para mostrar login
+function mostrarLogin() {
+  const appContainer = document.getElementById("app");
+  appContainer.innerHTML = `
+    <div class="auth-container">
+      <h2>Iniciar Sesión</h2>
+      <form id="loginForm">
+        <input type="email" placeholder="Email" required>
+        <input type="password" placeholder="Contraseña" required>
+        <button type="submit">Entrar</button>
+      </form>
+      <p>¿No tienes cuenta? <a href="#" id="showRegister">Regístrate</a></p>
+    </div>
+  `;
+  
+  document.getElementById('loginForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    // Lógica de login aquí
+    localStorage.setItem('userAuthenticated', 'true');
+    mostrarHome();
+  });
+  
+  document.getElementById('showRegister').addEventListener('click', mostrarRegistro);
+}
 
-mostrarRegistro()
-mostrarHome()
-mostrarLogin()
-mostrarLogout()
+function mostrarRegistro() {
+  const appContainer = document.getElementById("app");
+  appContainer.innerHTML = `
+    <div class="auth-container">
+      <h2>Registro</h2>
+      <form id="registerForm">
+        <input type="text" placeholder="Nombre" required>
+        <input type="email" placeholder="Email" required>
+        <input type="password" placeholder="Contraseña" required>
+        <button type="submit">Registrarse</button>
+      </form>
+      <p>¿Ya tienes cuenta? <a href="#" id="showLogin">Inicia Sesión</a></p>
+    </div>
+  `;
+  
+  document.getElementById('registerForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    // Lógica de registro aquí
+    localStorage.setItem('userAuthenticated', 'true');
+    mostrarHome();
+  });
+  
+  document.getElementById('showLogin').addEventListener('click', mostrarLogin);
+}
+
+// Inicializar la app
+function initApp() {
+  if (checkAuth()) {
+    mostrarHome();
+  } else {
+    mostrarLogin();
+  }
+}
+
+// Ejecutar cuando se cargue la página
+document.addEventListener('DOMContentLoaded', initApp);

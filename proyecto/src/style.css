@@ -1,105 +1,527 @@
-/* ===== ESTILOS PARA DIGIMON ===== */
-.digimon-card {
-  background: white;
-  border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 16px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  display: flex;
-  gap: 16px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+/* Estilos Digimon Theme */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.digimon-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-.digimon-image {
-  width: 100px;
-  height: 100px;
-  border-radius: 8px;
-  object-fit: cover;
-  flex-shrink: 0;
-}
-
-.digimon-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.digimon-name {
-  margin: 0 0 8px 0;
-  color: #333;
-  font-size: 1.25rem;
-  font-weight: bold;
-}
-
-.digimon-level {
-  margin: 0 0 8px 0;
-  color: #666;
-  font-size: 0.9rem;
-}
-
-.favorite-btn {
-  padding: 8px 16px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  background-color: #007AFF;
-  color: white;
-  font-weight: bold;
-  transition: background-color 0.2s ease;
-  align-self: flex-start;
-}
-
-.favorite-btn:hover {
-  background-color: #0056cc;
-}
-
-.favorite-btn.remove {
-  background-color: #ff6b6b;
-}
-
-.favorite-btn.remove:hover {
-  background-color: #ff5252;
-}
-
-.login-message {
-  color: #ff6b6b;
-  margin-top: 8px;
-  font-size: 0.8rem;
-  font-style: italic;
+body {
+  font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
 }
 
 /* Contenedor principal */
 #app {
-  max-width: 800px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 20px;
 }
 
-/* Títulos */
-h1 {
+/* Header estilo Digimon */
+.app-header {
   text-align: center;
+  margin-bottom: 30px;
+  padding: 25px;
+  background: linear-gradient(135deg, #ff6b6b, #ffa726);
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+  border: 3px solid #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.app-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Estilos para el header de usuario */
+.user-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.user-details h1 {
+  color: white;
+  font-size: 2.5em;
+  text-shadow: 3px 3px 0 #ff4081;
+  margin-bottom: 10px;
+}
+
+.user-details p {
+  color: white;
+  font-size: 1.2em;
+  text-shadow: 2px 2px 0 #ff4081;
+  margin: 0;
+}
+
+.user-details strong {
+  color: #4cc9f0;
+}
+
+/* Botón de logout */
+.logout-btn {
+  padding: 12px 20px;
+  background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+  color: white;
+  border: 2px solid #fff;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.logout-btn:hover {
+  background: linear-gradient(45deg, #ff5252, #ff6b6b);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+}
+
+/* Contenedor de filtros */
+.filters-container {
+  background: linear-gradient(145deg, #1a1a2e, #16213e);
+  border-radius: 15px;
+  padding: 25px;
+  margin: 20px 0;
+  border: 2px solid #4cc9f0;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+.search-box {
   margin-bottom: 20px;
-  color: #333;
+}
+
+.search-input {
+  width: 100%;
+  padding: 15px 20px;
+  background: rgba(255,255,255,0.1);
+  border: 2px solid #4361ee;
+  border-radius: 12px;
+  color: white;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #f72585;
+  background: rgba(255,255,255,0.15);
+  box-shadow: 0 0 20px rgba(247, 37, 133, 0.3);
+}
+
+.search-input::placeholder {
+  color: #a9d6e5;
+}
+
+.filter-group {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.filter-select {
+  flex: 1;
+  min-width: 150px;
+  padding: 12px 15px;
+  background: rgba(255,255,255,0.1);
+  border: 2px solid #4361ee;
+  border-radius: 10px;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: #f72585;
+}
+
+.filter-select option {
+  background: #1a1a2e;
+  color: white;
+}
+
+/* Botones de filtro */
+.favorites-btn, .show-all-btn {
+  padding: 12px 20px;
+  background: linear-gradient(45deg, #4361ee, #4cc9f0);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.favorites-btn:hover, .show-all-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(76, 201, 240, 0.4);
+}
+
+.favorites-btn.active, .show-all-btn.active {
+  background: linear-gradient(45deg, #f72585, #ff6b6b);
+  box-shadow: 0 0 20px rgba(247, 37, 133, 0.5);
+}
+
+/* Estadísticas */
+.digimon-stats {
+  text-align: center;
+  margin: 15px 0;
+  color: #4cc9f0;
+  font-size: 1.1em;
+  text-shadow: 0 0 10px rgba(76, 201, 240, 0.5);
+}
+
+/* Grid de Digimon - ESTO ES IMPORTANTE PARA EL DISEÑO HORIZONTAL */
+.digimon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  padding: 20px 0;
+}
+
+/* Tarjetas de Digimon - Estilo Digital */
+.app-card {
+  background: linear-gradient(145deg, #1a1a2e, #16213e);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 
+    0 10px 25px rgba(0,0,0,0.3),
+    inset 0 1px 0 rgba(255,255,255,0.2);
+  transition: all 0.3s ease;
+  border: 2px solid #4cc9f0;
+  position: relative;
+  overflow: hidden;
+}
+
+.app-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #4cc9f0, #f72585, #4361ee, #4cc9f0);
+  background-size: 200% 100%;
+  animation: borderGlow 2s linear infinite;
+}
+
+@keyframes borderGlow {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.app-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 
+    0 15px 35px rgba(76, 201, 240, 0.4),
+    inset 0 1px 0 rgba(255,255,255,0.3);
+  border-color: #f72585;
+}
+
+/* Header de la tarjeta con botón de favoritos */
+.card-header {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.digimon-img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 3px solid #4361ee;
+  background: linear-gradient(45deg, #4cc9f0, #4361ee);
+  padding: 5px;
+  display: block;
+  margin: 0 auto 15px;
+  transition: all 0.3s ease;
+}
+
+.app-card:hover .digimon-img {
+  border-color: #f72585;
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(247, 37, 133, 0.5);
+}
+
+.favorite-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  border: 2px solid #fff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.2em;
+}
+
+.favorite-btn:hover {
+  transform: scale(1.2);
+  background: rgba(247, 37, 133, 0.8);
+}
+
+.favorite-btn.favorited {
+  background: rgba(247, 37, 133, 0.9);
+  border-color: #f72585;
+}
+
+/* Información del Digimon */
+.app-info h2 {
+  color: #4cc9f0;
+  font-size: 1.4em;
+  margin-bottom: 10px;
+  text-align: center;
+  text-shadow: 0 0 10px rgba(76, 201, 240, 0.5);
+  background: linear-gradient(90deg, #4cc9f0, #f72585);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.app-info p {
+  color: #a9d6e5;
+  margin: 8px 0;
+  font-size: 1em;
+  text-align: center;
+}
+
+.app-info strong {
+  color: #f72585;
+}
+
+/* Badge de nivel con colores según el tipo */
+.level-badge {
+  display: inline-block;
+  padding: 6px 15px;
+  border-radius: 20px;
+  font-size: 0.8em;
+  font-weight: bold;
+  margin-top: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: white;
+}
+
+/* Colores diferentes para cada nivel */
+.level-fresh { background: #4ade80; color: #000; }
+.level-in-training { background: #fbbf24; color: #000; }
+.level-rookie { background: #60a5fa; color: white; }
+.level-champion { background: #f87171; color: white; }
+.level-ultimate { background: #c084fc; color: white; }
+.level-mega { background: linear-gradient(45deg, #ff6b6b, #ffa726); color: white; }
+
+/* Estados de carga y error */
+.loading, .error {
+  text-align: center;
+  padding: 60px 20px;
+  color: #4cc9f0;
+  font-size: 1.3em;
+  text-shadow: 0 0 10px rgba(76, 201, 240, 0.5);
+  grid-column: 1 / -1;
+}
+
+.error {
+  color: #f72585;
+}
+
+.no-results {
+  text-align: center;
+  padding: 60px 20px;
+  color: #a9d6e5;
+  font-size: 1.3em;
+  grid-column: 1 / -1;
+}
+
+.no-results::before {
+  content: '😢';
+  font-size: 3em;
+  display: block;
+  margin-bottom: 20px;
+}
+
+/* Auth Container - Estilo Digital */
+.auth-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 40px 30px;
+  background: linear-gradient(145deg, #1a1a2e, #16213e);
+  border-radius: 20px;
+  box-shadow: 
+    0 15px 35px rgba(0,0,0,0.5),
+    inset 0 1px 0 rgba(255,255,255,0.1);
+  border: 2px solid #4cc9f0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(76, 201, 240, 0.1), transparent);
+  animation: shine 3s infinite;
+}
+
+.auth-container h2 {
+  color: #4cc9f0;
+  margin-bottom: 25px;
+  font-size: 1.8em;
+  text-shadow: 0 0 10px rgba(76, 201, 240, 0.5);
+}
+
+.auth-container input {
+  width: 100%;
+  padding: 15px;
+  margin: 12px 0;
+  background: rgba(255,255,255,0.1);
+  border: 2px solid #4361ee;
+  border-radius: 10px;
+  color: white;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.auth-container input:focus {
+  outline: none;
+  border-color: #f72585;
+  background: rgba(255,255,255,0.15);
+  box-shadow: 0 0 15px rgba(247, 37, 133, 0.3);
+}
+
+.auth-container input::placeholder {
+  color: #a9d6e5;
+}
+
+.auth-container button {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(45deg, #4361ee, #f72585);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.auth-container button:hover {
+  background: linear-gradient(45deg, #f72585, #4361ee);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(247, 37, 133, 0.4);
+}
+
+.auth-container a {
+  color: #4cc9f0;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.auth-container a:hover {
+  color: #f72585;
+  text-shadow: 0 0 10px rgba(247, 37, 133, 0.5);
 }
 
 /* Responsive */
-@media (max-width: 600px) {
-  .digimon-card {
+@media (max-width: 768px) {
+  .user-info {
     flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+  
+  .user-details h1 {
+    font-size: 2em;
+  }
+  
+  .logout-btn {
+    width: 100%;
+    max-width: 200px;
+  }
+  
+  .filter-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .filter-select {
+    min-width: auto;
+  }
+  
+  .favorites-btn, .show-all-btn {
+    width: 100%;
     text-align: center;
   }
   
-  .digimon-image {
-    align-self: center;
+  .filters-container {
+    padding: 20px 15px;
+    margin: 15px 0;
   }
   
-  .favorite-btn {
-    align-self: center;
+  .digimon-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+    padding: 10px;
+  }
+  
+  .app-header {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .digimon-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .auth-container {
+    margin: 20px;
+    padding: 30px 20px;
+  }
+  
+  .user-details h1 {
+    font-size: 1.8em;
+  }
+  
+  .app-header {
+    padding: 15px;
   }
 }

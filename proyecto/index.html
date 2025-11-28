@@ -6,9 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>proyecto</title>
   </head>
+
+  
   <body>
+
+    <script>
+  // Función global para logout
+  window.logout = function() {
+    localStorage.removeItem('userAuthenticated');
+    localStorage.removeItem('userEmail');
+    localStorage.removeItem('userName');
+    window.location.reload();
+  }
+</script>
+
     <div id="menu"></div>
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
+
+
   </body>
 </html>
