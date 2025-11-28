@@ -3,15 +3,14 @@ import { collection, addDoc } from 'firebase/firestore';
 export default function mostrarOriginal() {
 // Objeto base
 let app = {
-nombreapp: "DigiAPP-v2",
-descripcion: "Con esta app vamos a poder ver toda la informaicon de los Digimon, sus evoluciones principales, sus datos de poder, su vida y otros datos importantes para que estes bien dateado",
+nombreapp: "DigiApp-v2",
+descripcion: "Es una aplicacion donde vas a poder guardar y poner a todos tus Digimon favoritos con sus datos mas importantes",
 icono: "https://cdn-icons-png.flaticon.com/512/2909/2909765.png",
-integrantes: ["David Pernett"],
+integrantes: ["David pernett"],
 actividad: "Capacitor Firebase",
-url:"https://drive.google.com/file/d/1Kl97mmRESu2GWPztzK2XdMvNR68vMQ00/view?usp=drive_link"
+url:
+"https://drive.google.com/file/d/1Kl97mmRESu2GWPztzK2XdMvNR68vMQ00/view?usp=drive_link"
 };
-
-
 // Contenedor principal
 const contenedor = document.getElementById("app");
 contenedor.innerHTML = "";
@@ -22,7 +21,7 @@ resultado.textContent = JSON.stringify(app, null, 2);
 
 // Campos a editar
 const campos = [
-{ key: "DigiAppv", label: "DigiApp V2" },
+{ key: "nombreapp", label: "Nombre de la app" },
 { key: "descripcion", label: "Descripción" },
 { key: "icono", label: "URL del ícono" },
 { key: "actividad", label: "Actividad" },
